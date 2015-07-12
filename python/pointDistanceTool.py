@@ -43,14 +43,14 @@ def Set():
 
     if tg1 == None or tg2 == None:
         cmds.warning("select 2 vertices")
-        return False
+        return None
 
     (mesh1, index1) = __getNodeAndIndex(tg1)
     (mesh2, index2) = __getNodeAndIndex(tg2)
 
     if mesh1 == None or index1 == None or mesh2 == None or index2 == None:
         cmds.warning("select 2 vertices")
-        return False
+        return None
 
     node = cmds.createNode("pointDistance")
     cmds.connectAttr("%s.worldMatrix" % (mesh1), "%s.imx" % (node))
@@ -62,7 +62,7 @@ def Set():
 
     cmds.setAttr("%s.i1" % (node), index1)
     cmds.setAttr("%s.i2" % (node), index2)
-    return True
+    return node
 
 
 
