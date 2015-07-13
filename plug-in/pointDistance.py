@@ -104,7 +104,8 @@ class PointDistance(MPxNode):
             pos1 *= mtx1
             if node.findPlug("smx").isConnected():
                 pos2 *= mtx2
-            pos2 *= mtx1
+            else:
+                pos2 *= mtx1
 
         return pos2.distanceTo(pos1)
 
