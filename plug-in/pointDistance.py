@@ -42,7 +42,7 @@ class PointDistance(MPxNode):
         matrix_attr.setStorable(True)
         matrix_attr.setHidden(True)
 
-        PointDistance.add_matrix = matrix_attr.create("additionalMatrix", "amx")
+        PointDistance.scn_matrix = matrix_attr.create("secondaryMatrix", "smx")
         matrix_attr.setStorable(True)
         matrix_attr.setHidden(True)
 
@@ -51,7 +51,7 @@ class PointDistance(MPxNode):
         type_attr.setStorable(True)
         type_attr.setHidden(True)
 
-        PointDistance.add_mesh = type_attr.create('addtionalMesh', 'adm',
+        PointDistance.snd_mesh = type_attr.create('secondaryMesh', 'sm',
                                                   MFnMeshData.kMesh)
         type_attr.setStorable(True)
         type_attr.setHidden(True)
@@ -59,10 +59,10 @@ class PointDistance(MPxNode):
         PointDistance.addAttribute(PointDistance.index1)
         PointDistance.addAttribute(PointDistance.index2)
         PointDistance.addAttribute(PointDistance.in_mesh)
-        PointDistance.addAttribute(PointDistance.add_mesh)
+        PointDistance.addAttribute(PointDistance.snd_mesh)
         PointDistance.addAttribute(PointDistance.out_value)
         PointDistance.addAttribute(PointDistance.in_matrix)
-        PointDistance.addAttribute(PointDistance.add_matrix)
+        PointDistance.addAttribute(PointDistance.scn_matrix)
 
         PointDistance.attributeAffects(PointDistance.index1,
                                        PointDistance.out_value)
@@ -70,11 +70,11 @@ class PointDistance(MPxNode):
                                        PointDistance.out_value)
         PointDistance.attributeAffects(PointDistance.in_mesh,
                                        PointDistance.out_value)
-        PointDistance.attributeAffects(PointDistance.add_mesh,
+        PointDistance.attributeAffects(PointDistance.snd_mesh,
                                        PointDistance.out_value)
         PointDistance.attributeAffects(PointDistance.in_matrix,
                                        PointDistance.out_value)
-        PointDistance.attributeAffects(PointDistance.add_matrix,
+        PointDistance.attributeAffects(PointDistance.scn_matrix,
                                        PointDistance.out_value)
 
     def __getVertexPoint(self, mesh, index):
@@ -113,16 +113,16 @@ class PointDistance(MPxNode):
             index1_in = data.inputValue(self.index1)
             index2_in = data.inputValue(self.index2)
             mesh1_in = data.inputValue(self.in_mesh)
-            mesh2_in = data.inputValue(self.add_mesh)
+            mesh2_in = data.inputValue(self.snd_mesh)
             matrix_in = data.inputValue(self.in_matrix)
-            matrix_add_in = data.inputValue(self.add_matrix)
+            matrix_snd_in = data.inputValue(self.scn_matrix)
             mesh1_obj = mesh1_in.asMesh()
             mesh2_obj = mesh2_in.asMesh()
             if (mesh1_obj.isNull() == False):
                 dis = self.__getDistance(mesh1_obj, mesh2_obj,
                                          index1_in.asInt(), index2_in.asInt(),
                                          matrix_in.asMatrix(),
-                                         matrix_add_in.asMatrix())
+                                         matrix_snd_in.asMatrix())
                 out_handle = data.outputValue(self.out_value)
                 out_handle.setFloat(dis)
             data.setClean(plug)
