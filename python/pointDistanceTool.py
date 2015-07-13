@@ -57,8 +57,8 @@ def Set():
     cmds.connectAttr("%s.outMesh" % (mesh1), "%s.im" % (node))
 
     if mesh1 != mesh2:
-        cmds.connectAttr("%s.worldMatrix" % (mesh2), "%s.amx" % (node))
-        cmds.connectAttr("%s.outMesh" % (mesh2), "%s.am" % (node))
+        cmds.connectAttr("%s.worldMatrix" % (mesh2), "%s.smx" % (node))
+        cmds.connectAttr("%s.outMesh" % (mesh2), "%s.sm" % (node))
 
     cmds.setAttr("%s.i1" % (node), index1)
     cmds.setAttr("%s.i2" % (node), index2)
