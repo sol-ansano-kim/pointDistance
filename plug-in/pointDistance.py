@@ -102,7 +102,7 @@ class PointDistance(MPxNode):
 
         if node.findPlug("imx").isConnected():
             pos1 *= mtx1
-            if node.findPlug("amx").isConnected():
+            if node.findPlug("smx").isConnected():
                 pos2 *= mtx2
             pos2 *= mtx1
 
